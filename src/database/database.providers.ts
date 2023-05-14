@@ -4,7 +4,8 @@ import { UserEntity } from 'src/user/entities/user.entity';
 
 export const databaseProviders = [
   {
-    provide: 'userservice',
+    provide: "USER",
+
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: process.env.DB_DIALECT as Dialect,
@@ -13,12 +14,13 @@ export const databaseProviders = [
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,
-        define:{
-          timestamps:false
-        }        
+        define: {
+          timestamps: true,
+      },
       });
-    sequelize.addModels([UserEntity]);
+      sequelize.addModels([UserEntity]);
       await sequelize.sync();
+      //await sequelize.sync({force: false});
       return sequelize;
     },
   },
