@@ -9,7 +9,7 @@ import {Controller,Get,Post,Body,Patch,Param,Delete,} from '@nestjs/common';
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
-  @Get('get')
+  @Get()
   findAll() {
     return this.usersService.findAll();
   }
@@ -19,7 +19,7 @@ export class UserController {
     return this.usersService.findOne(id);
   }
 
-  @Post('post')
+  @Post()
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
